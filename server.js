@@ -17,28 +17,19 @@ const path = require('path');
 const API_KEY = dot.parsed.API_KEY;
 
 // Middleware
-app.use(express.static(__dirname + '/public/assets'));
+app.use(express.static(__dirname + '/assets'));
 app.use('/', express.static(path.join(__dirname + '/node_modules')));
-
-// app.get('/', (req, res) =>{
-//     // res.send('Hello!');
-//     res.sendFile(path.dirname('public'));
-// })
-
 
 app.route('/')
     .post((req, res) =>{
-        res.send({API_KEY})
+        res.send({API_KEY: API_KEY})
     })
     .get((req, res) =>{
-        res.sendFile(path.join(__dirname, "/public/index.html"));
+        res.sendFile(path.join(__dirname, "/index.html"));
     });
 
 app.listen(PORT, err => {
     err ? log(err) : log(`http://localhost:${PORT}`);
-})
-
-
-
+});
 
 // log(process.env.API_KEY)
