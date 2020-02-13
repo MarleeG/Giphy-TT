@@ -22,7 +22,7 @@ app.use('/', express.static(path.join(__dirname + '/node_modules')));
 
 app.route('/')
     .post((req, res) =>{
-        res.send({API_KEY: API_KEY})
+        res.send({API_KEY})
     })
     .get((req, res) =>{
         res.sendFile(path.join(__dirname, "/index.html"));
