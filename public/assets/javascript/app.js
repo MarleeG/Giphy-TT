@@ -2,6 +2,7 @@
 
 const log = console.log;
 var topics = ['Shrek', 'Snoopy', 'Rick and Morty', 'Black Panther', 'Gas'];
+var getGiphs;
 
 $(() => {
     var API_KEY;
@@ -10,7 +11,7 @@ $(() => {
         API_KEY = data.API_KEY;
     })
         .done(() => {
-            var getGiphs = {
+            getGiphs = {
                 getData: (currentTopic) => {
                     log('topic: ', currentTopic);
 
@@ -41,7 +42,8 @@ $(() => {
         },
 
         InitialGiphs: (giphs) => {
-            log('function: ', giphs.data)
+            log('function: ', giphs.data);
+            $('.giphs').empty();
 
             giphs.data.forEach((item, idx) => {
                 let src_still = item.images.original_still.url;
@@ -78,11 +80,13 @@ $(() => {
             } else {
                 // value is empty and advise user to input text
                 // EXTRA: ADD ERROR ALERT IF TOPIC DOES NOT MATCH REQUIREMENTS NEEDED TO BE ADDED TO TOPICS 
-
             }
         },
         getSelectedValue: (e) => {
-            log('Selected topic: ', e);
+            let selected_topic = e;
+
+            getGiphs.getData(selected_topic);
+            
         }
     }
 
