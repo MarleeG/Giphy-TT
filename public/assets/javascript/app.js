@@ -36,16 +36,14 @@ $(() => {
             // <button type="button" class="btn btn-primary">1</button>
             $('#btn_topics').empty();
             topics.forEach(tpc => {
-                $('#btn_topics').append(`<button type="button" class="btn btn-dark">${tpc}</button>`);
+                $('#btn_topics').append(`<button type="button" class="btn btn-dark topic_btn">${tpc}</button>`);
             });
         },
 
         InitialGiphs: (giphs) => {
-
             log('function: ', giphs.data)
 
             giphs.data.forEach((item, idx) => {
-                // <img src="..." alt='...' class='giph col-lg-3 col-md-4 col-sm-5' status='still'/>
                 let src_still = item.images.original_still.url;
                 let alt = item.title;
                 let id = item.id;
@@ -63,9 +61,9 @@ $(() => {
     };
 
     var gameFunctions = {
+        // this function will determine if the value in the input will be added to the UI or not
         getInputVal: () => {
             let searching = $('#input_search').val().trim();
-
             if (searching.length > 0) {
                 // pushes latest topic added to topics array
                 topics.push(searching);
@@ -75,23 +73,37 @@ $(() => {
 
                 // this clears input out after the new search topic has been appended to the ui and topics array
                 $('#input_search').val('');
-                
 
-            }else{
+                // EXTRA: ADD SUCCESS ALERT ONCE TOPIC HAS BEEN ADDED TO THE UI 
+            } else {
                 // value is empty and advise user to input text
+                // EXTRA: ADD ERROR ALERT IF TOPIC DOES NOT MATCH REQUIREMENTS NEEDED TO BE ADDED TO TOPICS 
+
             }
+        },
+        getSelectedValue: (e) => {
+            log('Selected topic: ', e);
         }
     }
 
 
+    // On 'click' of the Search Button the inner function will be executed
     $('#search_btn').click(() => {
         gameFunctions.getInputVal();
     });
 
+    // $('.topic_btn').click(e => {
+    // });
+
+    $(document).on('click', '.topic_btn', e => {
+        let {innerText} = e.target;
+        gameFunctions.getSelectedValue(innerText);
+
+    });
+
+
+
 
     // displays all topics in topics variable
     display.ButtonTopics();
-
-
-
 });
