@@ -17,7 +17,7 @@ const path = require('path');
 const API_KEY = dot.parsed.API_KEY;
 
 // Middleware
-app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname + '/public/assets'));
 app.use('/', express.static(path.join(__dirname + '/node_modules')));
 
 app.route('/')
@@ -31,5 +31,3 @@ app.route('/')
 app.listen(PORT, err => {
     err ? log(err) : log(`http://localhost:${PORT}`);
 });
-
-// log(process.env.API_KEY)
