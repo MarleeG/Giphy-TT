@@ -10,31 +10,60 @@ $(() => {
         API_KEY = data.API_KEY;
     })
     .done(() => {
-        var game = {
-            getData: () => {
-                $.get(`https://api.giphy.com/v1/gifs/search?q=${topics[1]}&api_key=${API_KEY}&limit=15`, giphs => {
-                    log(giphs);
+        var getGiphs = {
+            getData: (currentTopic) => {
+                log('topic: ', currentTopic);
+
+                $.get(`https://api.giphy.com/v1/gifs/search?q=${currentTopic}&api_key=${API_KEY}&limit=16`)
+                .done(myGiphs => {
+                    // log(myGiphs);
+
+                    display.InitialGiphs(myGiphs);
                 });
             },
+        };
 
-            // this function will display all topics from the topics variable as buttons 
-            displayButtonTopics: () => {
-                // <button type="button" class="btn btn-primary">1</button>
-                $('#btn_topics').empty();
-                topics.forEach(tpc =>{
-                    $('#btn_topics').append(`<button type="button" class="btn btn-dark">${tpc}</button>`);
-                });
-            }
-        }
-
-        // displays all topics in topics variable
-        game.displayButtonTopics();
-
-        // this gets the data from the api and logs it currently
-        game.getData();
-
-
+        
+        
+        // Gets the default Giphs
+        getGiphs.getData(topics[1]);
     });
+
+
+    var display = {
+        // this function will display all topics from the topics variable as buttons 
+        ButtonTopics: () => {
+            // <button type="button" class="btn btn-primary">1</button>
+            $('#btn_topics').empty();
+            topics.forEach(tpc => {
+                $('#btn_topics').append(`<button type="button" class="btn btn-dark">${tpc}</button>`);
+            });
+        },
+
+        InitialGiphs: (giphs) => {
+
+            log('function: ', giphs.data)
+
+            giphs.data.forEach((item, idx) =>{
+                // <img src="..." alt='...' class='giph col-lg-3 col-md-4 col-sm-5' status='still'/>
+                let src_still = item.images.original_still.url;
+                let alt = item.title;
+                let id = item.id;
+
+                // log(`idx: ${idx}`);
+                // log(`src: ${src_still}`);
+                // log(`alt: ${alt}`);
+                // log('----------------------------------------------------------------------');
+
+                $('.giphs').append(`<img src="${src_still}" alt='${alt}' class='giph col-lg-3 col-md-4 col-sm-5 my-1 mx-1' status='still' id='${id}'/>`);
+
+
+
+            });
+        }
+    }
+    // displays all topics in topics variable
+    display.ButtonTopics();
 
 
 
