@@ -1,0 +1,12 @@
+*, *::before, *::after {box-sizing: inherit;}
+html {box-sizing: border-box;}
+
+
+
+#search_btn{
+    width: 15%;
+}
+
+.row_giphs{
+    border: 2px solid #343a40;
+}
