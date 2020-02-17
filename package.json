@@ -18,9 +18,11 @@
     "url": "https://github.com/MarleeG/Giphy-TT/issues"
   },
   "homepage": "https://github.com/MarleeG/Giphy-TT#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  },
   "dependencies": {
     "express": "^4.17.1",
-    "path": "^0.12.7",
-    "dotenv": "^8.2.0"
+    "path": "^0.12.7"
   }
 }
