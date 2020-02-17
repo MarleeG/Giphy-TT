@@ -1,5 +1,7 @@
 # Giphy-TT
 
+This app was created for your entertainment. Click on the giph and watch it play!
+
 ## Built With 
 - [Javscript](https://www.javascript.com/)
 - [jQuery](https://jquery.com/)
@@ -10,4 +12,4 @@
 
 
 ## Deployed App
-Coming Soon
+* [Giphy-TT](https://giphy-tt.herokuapp.com) - App  
