@@ -42,7 +42,6 @@ $(() => {
         },
 
         InitialGiphs: (giphs) => {
-            log('function: ', giphs.data);
             $('.giphs').empty();
 
             giphs.data.forEach((item, idx) => {
@@ -70,8 +69,15 @@ $(() => {
                 // pushes latest topic added to topics array
                 topics.push(searching);
 
+                
+                
+
                 // displays new set of topics
                 display.ButtonTopics();
+
+
+                // display.InitialGiphs(searching);
+                getGiphs.getData(searching);
 
                 // this clears input out after the new search topic has been appended to the ui and topics array
                 $('#input_search').val('');
