@@ -30,6 +30,8 @@ app.route('/')
         res.sendFile(path.join(__dirname, "/index.html"));
     });
 
-app.listen(PORT, err => {
-    err ? log(err) : log(`http://localhost:${PORT}`);
-});
+// app.listen(PORT, err => {
+//     err ? log(err) : log(`http://localhost:${PORT}`);
+// });
+
+app.listen(PORT);
