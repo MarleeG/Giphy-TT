@@ -96,8 +96,6 @@ $(() => {
         },
         // this will toggle the images/giph to active or inactive which will determine if the image should be moving or not
         toggleGiph: (info) => {
-            // log(info.target.id);
-            log('clicked giph!')
             let giph_id = info.target.id
 
             $.get(`https://api.giphy.com/v1/gifs/${giph_id}?api_key=${API_KEY}`, data => {

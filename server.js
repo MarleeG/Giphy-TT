@@ -20,6 +20,8 @@ const API_KEY = dot.parsed.API_KEY;
 app.use(express.static(__dirname + '/public/assets'));
 app.use('/', express.static(path.join(__dirname + '/node_modules')));
 
+log(process.env);
+
 app.route('/')
     .post((req, res) =>{
         res.send({API_KEY: process.env.API_KEY})
