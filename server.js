@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3000;
 const path = require('path');
 
 // API KEY
-const API_KEY = dot.parsed.API_KEY;
+// const API_KEY = dot.parsed.API_KEY;
+// log(API_KEY);
 
 // Middleware
 app.use(express.static(__dirname + '/public/assets'));
