@@ -55,7 +55,7 @@ $(() => {
                 // log(`alt: ${alt}`);
                 // log('----------------------------------------------------------------------');
 
-                $('.giphs').append(`<img src="${src_still}" alt='${alt}' class='giph col-lg-3 col-md-4 col-sm-5 my-1 mx-1' status='still' id='${id}'/>`);
+                $('.giphs').append(`<img src="${src_still}" alt='${alt}' class='giph col-lg-3 col-md-4 col-sm-5 my-1 mx-1' status='inactive' id='${id}'/>`);
             });
 
 
@@ -86,7 +86,44 @@ $(() => {
             let selected_topic = e;
 
             getGiphs.getData(selected_topic);
-            
+
+        },
+        // this will toggle the images/giph to active or inactive which will determine if the image should be moving or not
+        toggleGiph: (info) => {
+            // log(info.target.id);
+            log('clicked giph!')
+            let giph_id = info.target.id
+
+            $.get(`https://api.giphy.com/v1/gifs/${giph_id}?api_key=${API_KEY}`, data => {
+                log('data: ', data);
+                log('status: ', status);
+
+
+            }).done((giph_details, status) => {
+                // giph image url/src
+                let active_url = giph_details.data.images.downsized_medium.url;
+
+                // still image url/src
+                let inactive_url = giph_details.data.images.original_still.url;
+
+                if (status === 'success') {
+                    let current_status = $(`#${giph_id}`).attr('status');
+
+                    if (current_status === 'inactive') {
+                        // change to active and update the url;
+                        $(`#${giph_id}`).attr('status', 'active');
+
+                        $(`#${giph_id}`).attr('src', active_url);
+
+                    } else {
+                        // status is active 
+                        // change to inactive and make image still
+                        $(`#${giph_id}`).attr('status', 'inactive');
+
+                        $(`#${giph_id}`).attr('src', inactive_url);
+                    }
+                }
+            });
         }
     }
 
@@ -96,17 +133,26 @@ $(() => {
         gameFunctions.getInputVal();
     });
 
-    // $('.topic_btn').click(e => {
-    // });
-
-    $(document).on('click', '.topic_btn', e => {
-        let {innerText} = e.target;
-        gameFunctions.getSelectedValue(innerText);
-
+    // This function does the same action as the above coded click listener
+    $(document).on('keyup', (e) => {
+        if (e.originalEvent.keyCode === 13) {
+            // if the user presses enter
+            gameFunctions.getInputVal();
+        }
     });
 
+    
 
+    $(document).on('click', '.topic_btn', e => {
+        let { innerText } = e.target;
+        gameFunctions.getSelectedValue(innerText);
+    });
 
+    $(document).on('click', '.giph', info => {
+        gameFunctions.toggleGiph(info);
+    });
+
+    
 
     // displays all topics in topics variable
     display.ButtonTopics();
